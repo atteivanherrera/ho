@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>py - Premier League Analysis 21/22 season | Vanya stats</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="py - Premier League Analysis 21/22 season" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="21/22 season is over but we can learn from premier league teams last year, in this post:" />
+<meta property="og:description" content="21/22 season is over but we can learn from premier league teams last year, in this post:" />
+<link rel="canonical" href="http://localhost:4000/ho/python/2023/02/15/Premier-League-21-22.html" />
+<meta property="og:url" content="http://localhost:4000/ho/python/2023/02/15/Premier-League-21-22.html" />
+<meta property="og:site_name" content="Vanya stats" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-02-15T00:00:50-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="py - Premier League Analysis 21/22 season" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-02-15T00:00:50-05:00","datePublished":"2023-02-15T00:00:50-05:00","description":"21/22 season is over but we can learn from premier league teams last year, in this post:","headline":"py - Premier League Analysis 21/22 season","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ho/python/2023/02/15/Premier-League-21-22.html"},"url":"http://localhost:4000/ho/python/2023/02/15/Premier-League-21-22.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/ho/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/ho/feed.xml" title="Vanya stats" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/ho/">Vanya stats</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/ho/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">py - Premier League Analysis 21/22 season</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-02-15T00:00:50-05:00" itemprop="datePublished">Feb 15, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>21/22 season is over but we can learn from premier league teams last year, in this post:</p>
+
+<ol>
+  <li>How was the road for Manchester City title?</li>
+  <li>What were the key matches who decided the champions?</li>
+  <li>How was the road for the relegated teams?</li>
+</ol>
+
+<p>We’re gonna use the usual libraries:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span></code></pre></figure>
+
+<p>Let’s check at the overview of the table at the end of the season:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Team</th>
+      <th>Pld</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GF</th>
+      <th>GA</th>
+      <th>GD</th>
+      <th>Pts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Manchester City</td>
+      <td>38</td>
+      <td>29</td>
+      <td>6</td>
+      <td>3</td>
+      <td>99</td>
+      <td>26</td>
+      <td>73</td>
+      <td>93</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Liverpool</td>
+      <td>38</td>
+      <td>28</td>
+      <td>8</td>
+      <td>2</td>
+      <td>94</td>
+      <td>26</td>
+      <td>68</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Chelsea</td>
+      <td>38</td>
+      <td>21</td>
+      <td>11</td>
+      <td>6</td>
+      <td>76</td>
+      <td>33</td>
+      <td>43</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Tottenham Hotspur</td>
+      <td>38</td>
+      <td>22</td>
+      <td>5</td>
+      <td>11</td>
+      <td>69</td>
+      <td>40</td>
+      <td>29</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Arsenal</td>
+      <td>38</td>
+      <td>22</td>
+      <td>3</td>
+      <td>13</td>
+      <td>61</td>
+      <td>48</td>
+      <td>13</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Manchester United</td>
+      <td>38</td>
+      <td>16</td>
+      <td>10</td>
+      <td>12</td>
+      <td>57</td>
+      <td>57</td>
+      <td>0</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>West Ham United</td>
+      <td>38</td>
+      <td>16</td>
+      <td>8</td>
+      <td>14</td>
+      <td>60</td>
+      <td>51</td>
+      <td>9</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Leicester City</td>
+      <td>38</td>
+      <td>14</td>
+      <td>10</td>
+      <td>14</td>
+      <td>62</td>
+      <td>59</td>
+      <td>3</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Brighton and Hove Albion</td>
+      <td>38</td>
+      <td>12</td>
+      <td>15</td>
+      <td>11</td>
+      <td>42</td>
+      <td>44</td>
+      <td>-2</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Wolverhampton Wanderers</td>
+      <td>38</td>
+      <td>15</td>
+      <td>6</td>
+      <td>17</td>
+      <td>38</td>
+      <td>43</td>
+      <td>-5</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Newcastle United</td>
+      <td>38</td>
+      <td>13</td>
+      <td>10</td>
+      <td>15</td>
+      <td>44</td>
+      <td>62</td>
+      <td>-18</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Crystal Palace</td>
+      <td>38</td>
+      <td>11</td>
+      <td>15</td>
+      <td>12</td>
+      <td>50</td>
+      <td>46</td>
+      <td>4</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Brentford</td>
+      <td>38</td>
+      <td>13</td>
+      <td>7</td>
+      <td>18</td>
+      <td>48</td>
+      <td>56</td>
+      <td>-8</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Aston Villa</td>
+      <td>38</td>
+      <td>13</td>
+      <td>6</td>
+      <td>19</td>
+      <td>52</td>
+      <td>54</td>
+      <td>-2</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Southampton</td>
+      <td>38</td>
+      <td>9</td>
+      <td>13</td>
+      <td>16</td>
+      <td>43</td>
+      <td>67</td>
+      <td>-24</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Everton</td>
+      <td>38</td>
+      <td>11</td>
+      <td>6</td>
+      <td>21</td>
+      <td>43</td>
+      <td>66</td>
+      <td>-23</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Leeds United</td>
+      <td>38</td>
+      <td>9</td>
+      <td>11</td>
+      <td>18</td>
+      <td>42</td>
+      <td>79</td>
+      <td>-37</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Burnley</td>
+      <td>38</td>
+      <td>7</td>
+      <td>14</td>
+      <td>17</td>
+      <td>34</td>
+      <td>53</td>
+      <td>-19</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Watford</td>
+      <td>38</td>
+      <td>6</td>
+      <td>5</td>
+      <td>27</td>
+      <td>34</td>
+      <td>77</td>
+      <td>-43</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Norwich City</td>
+      <td>38</td>
+      <td>5</td>
+      <td>7</td>
+      <td>26</td>
+      <td>23</td>
+      <td>84</td>
+      <td>-61</td>
+      <td>22</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In the table we can see the positions after 38 games, <strong>Machester City</strong> and <strong>Liverpool</strong>, clearly dominated the entire season, Manchester City won again a championship by one point difference with 93 points, to have a context, there are 114 available points each season, to have a performace like Manchester City won <strong>+81.58%</strong> of disputed points throught the year, that is 2.447 out of 3 points for 38 matches!</p>
+
+<p>The average team in the 21/22 premier league:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GF</th>
+      <th>GA</th>
+      <th>GD</th>
+      <th>Pts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Average team</td>
+      <td>14.6</td>
+      <td>8.8</td>
+      <td>14.6</td>
+      <td>53.55</td>
+      <td>53.55</td>
+      <td>0</td>
+      <td>52.6</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A team with that amount of points will be placed at 8th only behind West Ham to dispute the middle of the table. Europe competitions are 17 points away to get to the Europe League and 19 points to play in the Champions League.</p>
+
+<h1 id="1-how-was-the-road-for-manchester-city-title">1. How was the road for Manchester City title?</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Team</th>
+      <th>Pld</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GF</th>
+      <th>GA</th>
+      <th>GD</th>
+      <th>Pts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Manchester City</td>
+      <td>38</td>
+      <td>29</td>
+      <td>6</td>
+      <td>3</td>
+      <td>99</td>
+      <td>26</td>
+      <td>73</td>
+      <td>93</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Liverpool</td>
+      <td>38</td>
+      <td>28</td>
+      <td>8</td>
+      <td>2</td>
+      <td>94</td>
+      <td>26</td>
+      <td>68</td>
+      <td>92</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>There were only 2 runners up, Manchester City and Liverpool.</p>
+
+<p>Manchester City with 29 victories out of the 38 possible, 6 draws and only 2 loses, 73 goals of difference.</p>
+
+<p style="text-align: center;"><img src="/ho/images/steps.jpeg" /></p>
+
+<p>Here is how the season went for both teams:</p>
+
+<p>Liverpool was leader until round 11, when Liverpool lost the invict of 11th matches in premier league against West Ham in an away game,</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Home Team</th>
+      <th>Result</th>
+      <th>Away Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>07-Nov-2021</td>
+      <td>West Ham United</td>
+      <td>3:2</td>
+      <td>Liverpool</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">plt</span><span class="p">.</span><span class="n">barh</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'Team'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'W'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">'g'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Wins'</span> <span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">barh</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'Team'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'D'</span><span class="p">],</span> <span class="n">left</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'W'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">'y'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Draws'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">barh</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'Team'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'L'</span><span class="p">],</span> <span class="n">left</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'W+D'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s">'r'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Loses'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'lower center'</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">labelbottom</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">box</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span></code></pre></figure>
+
+<p style="text-align: center;"><img src="/ho/images/points.jpeg" /></p>
+
+
+  </div><a class="u-url" href="/ho/python/2023/02/15/Premier-League-21-22.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/ho/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Vanya stats</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Vanya stats</li><li><a class="u-email" href="mailto:gmail.com">gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/ho/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/ho/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
